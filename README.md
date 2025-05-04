@@ -10,3 +10,5 @@
 ![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/SMFSW/a9a2b2a02fda1b33461d53ddfe69d649/raw/smfsw_github_sandbox_custom_repo_badge.json)
 
 SMFSW Github sandbox (for testing purposes)
+
+* `GITHUB_REPOS_ROOT` needs to be defined in windows environment variables (used as the root path of the github local repositories to recurse in)

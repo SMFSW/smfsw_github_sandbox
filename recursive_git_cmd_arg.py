@@ -19,12 +19,12 @@ def recursive_git_repository_command(root, cmd):
 
 def main():
     parser = argparse.ArgumentParser(description="Execute a command in all folders including a Git repository.")
-    parser.add_argument("root", help="Root path")
-    parser.add_argument("cmd", help="Command to execute (between quotes if command contains spaces)")
+    parser.add_argument("--root", required=True, help="Root path")
+    parser.add_argument("--cmd", required=True, help="Command to execute (between quotes if command contains spaces)")
 
     args = parser.parse_args()
     recursive_git_repository_command(args.root, args.cmd)
+    os.system("PAUSE")
 
 if __name__ == "__main__":
     main()
-	os.system("PAUSE")
