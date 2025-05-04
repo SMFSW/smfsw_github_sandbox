@@ -1,0 +1,30 @@
+name: Run a bash command and catch output
+
+on: [push]
+
+jobs:
+
+  create_badges:
+    name: run_bash
+
+    runs-on: ubuntu-latest
+
+    env:
+      # can instead be a github env variable
+      env_var: |
+        echo "Starting job..."
+        LATEST=$(curl -s https://api.github.com/repos/SMFSW/smfsw_github_sandbox/releases/latest | jq -r .tag_name)
+        echo "latest_tag=$LATEST" >> $GITHUB_OUTPUT
+        echo "Done."
+    
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run inline script
+        id: get_release
+        run: |
+          echo "$env_var" > script.sh
+          chmod +x script.sh
+          ./script.sh
+      - name: Catch get_release output
+        run: echo "Latest release is ${{ steps.get_release.outputs.latest_tag }}"
