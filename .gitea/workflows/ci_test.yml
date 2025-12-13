@@ -1,0 +1,14 @@
+name: CI_test
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  test:
+    runs-on: docker
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          echo "Runner OK"
+          uname -m
