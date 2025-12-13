@@ -1,0 +1,27 @@
+name: CI_actions_test
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  test:
+    runs-on: docker
+    container:
+      image: node:20-alpine
+    steps:
+      - name: Debug environment
+        run: |
+            echo "Node version: $(node --version)"
+            echo "Arch: $(uname -m)"
+            echo "GITEA_ACTIONS=$GITEA_ACTIONS"
+            env | grep -E 'GITEA_|GITHUB_'
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Checkout result
+        run: |
+          echo "Repo checked out"
+          cd "$GITHUB_WORKSPACE"
+          echo "Commit SHA: $GITHUB_SHA"
+          echo "Commit contents:"
+          ls
