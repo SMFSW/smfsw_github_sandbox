@@ -1,0 +1,26 @@
+name: cppcheck
+
+on: [push]
+
+jobs:
+  cppcheck:
+    runs-on: docker
+    container:
+      image: node:20-alpine
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install cppcheck
+        run: |
+          apk add --no-cache cppcheck
+
+      - name: Run cppcheck
+        run: |
+          echo "Commit SHA: $GITHUB_SHA"
+          echo "Cppcheck version: $(cppcheck --version)"
+          cd "$WORKDIR"
+          cppcheck \
+            --enable=all \
+            --inconclusive \
+            --error-exitcode=1 \
+            .
